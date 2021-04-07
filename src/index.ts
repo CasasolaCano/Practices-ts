@@ -1,33 +1,30 @@
 
-
-// let abilities: (string | number)[] = ['Dash', 'Shield', 'Healing'];      Mala práctica
-
-import { createEmitAndSemanticDiagnosticsBuilderProgram } from "typescript";
-
-//Los arreglos(Arrays) también deben ir con tipado estricto, esto es una buena práctica para no inducirnos a errores futuros
-
-let abilities: string[] = ['Dash', 'Shield', 'Healing'];
+/*
+    Las funciones de typescript también deben especificar el retorno de la misma en 
+    la medida de lo posible, si sabemos que la el resultado de la suma es un número
+    debemos decirle a la función qué el resultado a devolver es un number.
+*/
 
 
-// Usamos las interfaces para definir las variables dentro de los objetos y asegurarnos de que typescript sepa que tipo de 
-// variables estamos utilizando. Según la documentación de typescript, una interface es una forma de nombrar un tipo objeto
-//  https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces
-
-interface Character {
-    nombre: string;
-    hp: number;
-    abilities: string[];
-    home?: string;      // Si no le decimos a la interface que home es opcional, será obligatorio añadirlo en la creación del de mas abajo.
+function sumar(a:number,b:number): number {
+    return a + b;
 }
 
-const character: Character = {
-    nombre: 'strider',
-    hp: 100,
-    abilities: ['Dash', 'Shield', 'Healing']
+//Función flecha la cual hemos tipado al igual que la anterior.
+
+const sumarFlecha = (a:number,b:number):number => {
+    return a + b;
 }
 
-// Al haber añadido el home de manera opcional (colocando una '?' antes de los dos puntos '?:'), podemos añadir esa variable mas tarde si es necesaria.
+//Una buena práctica en typescript es colocar primero los argumentos obligatorios
+//luego los opcionales, y finalmente los que tengan un valor por defecto
 
-character.home = 'Olive Town';      
+function multiplicar(a:number, b?:number, base:number = 2):number {
+    return a * base;
+}
 
-console.table(character);
+const resultado = sumar(10, 20);
+
+const resultado2 = multiplicar(10,20);
+
+console.log(resultado);
