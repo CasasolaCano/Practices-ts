@@ -1,44 +1,41 @@
-import { updateAsExpression } from "typescript";
 
-/*
-No es comun ver objetos anidados dentro de una interface, es muy facil 
-que el programa crezca en complejidad y dentro de ese objeto haya otro objeto...
-Lo más comun es crear tantas interfaces como nos hagan falta
-*/
+interface Player {
 
-interface SuperHeroe {
-    name: string;
-    age: number;
-    // address: {
-    //     street:string,
-    //     country:string,
-    //     city:string
-    // };
-    address:Address;
-    showAddress: () => void;
-}
-//Crearemos tantas interfaces como necesitemos, asi tendremos el código mas ordenado
-//y será mas facil leerlo y crear una documentación a partir de aquí
-
-interface Address {
-    street:string;
-    country:string;
-    city:string;
+    volume: number;
+    second: number;
+    song: string;
+    details:Details;
 }
 
-const superHeroe: SuperHeroe = {
-    name: 'Spiderman',
-    age: 30,
-    address: {
-        street: 'Main St',
-        country: 'USA',
-        city: 'NY'
-    },
+interface Details {
+    author: string;
+    year: number;
+}
 
-    showAddress() {
-        return this.name + ', ' + this.address.city + ', ' + this.address.country;
+const player: Player = {
+    volume: 90,
+    second: 30,
+    song: 'Mess around',
+    details: {
+        author: 'Cage the Elephant',
+        year: 2015
     }
 }
 
-const address = superHeroe.showAddress();
-console.log(address);
+/*
+    Podemos desestructurar los objetos, esto nos deja un código mas limpio y ordenado,
+    tenemos varias maneras de desestructurar un objeto dentro de otro,
+    el siguiente ejemplo puede ser algo complicado de entender cuando tenemos mucho
+    código escrito.
+*/
+
+const {volume, second, song, details:{author} } = player;
+
+//Este ejemplo comentado aqui abajo sería la manera correcta para mantener el código lo mas limpio posible.
+
+// const { author } = details;
+
+console.log('El volumen actual es de: ', volume);
+console.log('El segundo actual es de: ', second);
+console.log('La cancion actual es de: ', song);
+console.log('El autor actual es: ', author);
